@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Added link to the jQuery Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Added a link to Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+        crossorigin="anonymous">
+    <link href="" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <span id="game-wins"></span>
+            <span id="game-loss"></span>
+        </div>
+        <div id="crystals"></div>
+        <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+            <div class="card-header">Target Number</div>
+            <div class="card-body">
+                <h4 id="randomNumber" class="card-title">00</h4>
+            </div>
+        </div>
+        <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+            <div class="card-header">Current Score</div>
+            <div class="card-body">
+                <h4  id="game-total" class="card-title">Press Start!</h4>
+            </div>
+            <button id="start-game">START</button>
+    </div>
+            <script>
+                // Variables
+                var wins = 0;
+                var losses = 0;
+                var numberTotal = 0;
+                var crystals = ["btn1","btn2","btn3","btn4"];
+                var targetNumb = Math.round(Math.random()*20)+120;
+
+                $("#randomNumber").text(targetNumb);
+                $("#game-total").text(numberTotal);
+
+                
+                //assign button value from array
+                for (var i = 0; i < crystals.length; i++) { 
+                    var buttonNum = randomArray(1, 1, 12);
+                    var buttons = $('<button value='+ buttonNum +'></button>');
+                    buttons.appendTo('#crystals'); 
+                }
+
+                // return ranged random num -  min...max
+                function random_number(min, max) {
+                    return (Math.round((max - min) * Math.random() + min));
+                }
+                //create random number function
+                function randomArray(num_elements, min, max) {
+                    var temp, nums = new Array;
+                    for (var element = 0; element < num_elements; element++) {
+
+                        while ((temp = number_found(random_number(min, max), nums)) == -1);
+                        nums[element] = temp;
+                    }
+                    return (nums);
+                }
+                //keep number unique from others
+                function number_found(random_number, number_array) {
+                    //if number has already been generated...
+                    for (var element = 0; element < number_array.length; element++) {
+                        if (random_number == number_array[element]) {
+                            return (-1);
+                        }
+                    }
+                    return (random_number);
+                }
+
+            </script>
+
+</body>
+
+</html>
